@@ -14,14 +14,23 @@ export async function GET(req) {
     // Use environment variable for token verification
     if (hub_mode === "subscribe" && hub_verify_token === process.env.WEBHOOK_VERIFY_TOKEN) {
       console.log("✔ Webhook Verified Successfully!");
-      return new Response(hub_challenge, { status: 200 });
+      return new Response(hub_challenge, {
+        status: 200,
+        headers: { "Content-Type": "text/plain" }, // ⚠ Must be plain text
+      });
     } else {
       console.error("❌ Webhook Verification Failed");
-      return new Response("Verification failed", { status: 403 });
+      return new Response("Verification failed", {
+        status: 403,
+        headers: { "Content-Type": "text/plain" },
+      });
     }
   } catch (err) {
     console.error("❌ GET Webhook Error:", err);
-    return new Response("Server Error", { status: 500 });
+    return new Response("Server Error", {
+      status: 500,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
 }
 
@@ -53,19 +62,22 @@ export async function POST(req) {
           status: "delivered",
           messageId: msg.id,
           timestamp: new Date(parseInt(msg.timestamp) * 1000),
-          contactName: contact?.profile?.name || "Unknown"
+          contactName: contact?.profile?.name || "Unknown",
         });
 
         console.log(`✅ Incoming message saved from ${msg.from}`);
       }
     }
 
-    return new Response(JSON.stringify({ status: "received" }), { status: 200 });
+    return new Response(JSON.stringify({ status: "received" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (err) {
     console.error("❌ Error in POST Webhook:", err);
-    return new Response(
-      JSON.stringify({ status: "error", error: err.message }),
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ status: "error", error: err.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
