@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { FaComments, FaCircle, FaUsers, FaCogs, FaUser } from "react-icons/fa";
-import { Tooltip } from "react-tooltip"; // optional library or custom tooltip
 
 export default function Sidebar({ onSelect }) {
   const icons = [

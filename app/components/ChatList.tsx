@@ -1,7 +1,9 @@
 "use client";
 
-interface Contact {
+// This interface must match the one in page.tsx
+export interface Contact {
   name: string;
+  number: string; // This is required
   unread: boolean;
   favorite: boolean;
 }

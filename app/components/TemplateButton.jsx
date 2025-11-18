@@ -2,12 +2,28 @@
 
 export default function TemplateButton({ contact }) {
   const sendTemplate = async () => {
-    const res = await fetch("/api/send", {
-      method: "POST",
-      body: JSON.stringify({ to: contact.number })
-    });
-    const data = await res.json();
-    alert(JSON.stringify(data));
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json', // ✅ ADD THIS HEADER
+        },
+        body: JSON.stringify({ 
+          toNumber: contact.number, // ✅ CHANGE 'to' TO 'toNumber'
+          templateName: "hello_world" // ✅ ADD TEMPLATE NAME
+        })
+      });
+      
+      const data = await res.json();
+      
+      if (data.success) {
+        alert(`✅ Message sent to ${contact.name || contact.number}`);
+      } else {
+        alert(`❌ Failed: ${data.error}`);
+      }
+    } catch (error) {
+      alert(`❌ Error: ${error.message}`);
+    }
   };
 
   return (
