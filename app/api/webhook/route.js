@@ -1,6 +1,5 @@
-import { connectDB } from "@/lib/db";
-import Message from "@/models/Message";
-
+import { connectDB } from '@/lib/db';  // ✅ Named import
+import Message from '@/models/Message';
 // ==========================
 // 📌 Webhook Verification (GET)
 // ==========================
