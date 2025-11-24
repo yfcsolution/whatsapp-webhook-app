@@ -32,7 +32,7 @@ export default function Home() {
 
   // ✅ FIXED: Convert to international format (remove leading 0, add 92)
   const contacts: Contact[] = [
-    { name: "Laila", number: "923010813515", unread: true, favorite: true },
+    { name: "Laila", number: "923010813515", unread: true, favorite: false },
     { name: "Ceo", number: "923130541339", unread: false, favorite: false },
   ];
 
