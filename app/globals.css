@@ -24,3 +24,227 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* WhatsApp Media Persistence Styles - Prevent Auto-Hiding */
+
+/* Force media elements to stay visible and prevent auto-hiding */
+.whatsapp-media {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 200px;
+  min-width: 200px;
+  max-width: 300px;
+  border-radius: 10px;
+  margin: 5px 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Sticker container fixes - prevent showing as text names */
+.sticker-container {
+  display: inline-block !important;
+  background: transparent;
+  border: none;
+  margin: 5px;
+  position: relative;
+}
+
+.sticker-container img {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: contain;
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Media message containers */
+.media-message {
+  position: relative;
+  transition: opacity 0.3s ease;
+  margin: 8px 0;
+  animation: fadeInMedia 0.5s ease-in forwards;
+}
+
+.media-message:hover {
+  opacity: 1 !important;
+}
+
+/* Prevent auto-hiding of media elements with data attributes */
+[data-media="true"] {
+  animation: fadeInMedia 0.5s ease-in forwards;
+  display: block !important;
+}
+
+[data-sticker="true"] {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Document preview styles */
+.document-preview {
+  display: flex !important;
+  align-items: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 8px 0;
+  border: 1px solid #e9ecef;
+  min-width: 250px;
+}
+
+.document-preview:hover {
+  background: #e9ecef;
+}
+
+/* Image container with persistence */
+.image-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 300px;
+  margin: 4px 0;
+}
+
+.image-container img {
+  display: block !important;
+  width: 100%;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.02);
+}
+
+/* Video player styles */
+.video-player {
+  display: block !important;
+  max-width: 300px;
+  border-radius: 12px;
+  margin: 4px 0;
+}
+
+/* Audio player styles */
+.audio-player {
+  display: flex !important;
+  align-items: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 25px;
+  margin: 8px 0;
+  min-width: 250px;
+}
+
+/* Animation for smooth media appearance */
+@keyframes fadeInMedia {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes stickerPop {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.8) rotate(-5deg);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Sticker specific animations */
+.sticker-container {
+  animation: stickerPop 0.3s ease-out forwards;
+}
+
+/* Media loading states */
+.media-loading {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin: 8px 0;
+}
+
+.media-error {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  background: #ffe6e6;
+  border-radius: 12px;
+  margin: 8px 0;
+  border: 1px solid #ffcccc;
+}
+
+/* Dark mode support for media elements */
+@media (prefers-color-scheme: dark) {
+  .document-preview {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .document-preview:hover {
+    background: #4a5568;
+  }
+  
+  .audio-player {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .media-loading {
+    background: #2d3748;
+  }
+  
+  .media-error {
+    background: #442222;
+    border-color: #553333;
+  }
+}
+
+/* Ensure media elements in chat bubbles are visible */
+.chat-bubble .whatsapp-media,
+.chat-bubble .sticker-container,
+.chat-bubble .image-container,
+.chat-bubble .video-player,
+.chat-bubble .audio-player,
+.chat-bubble .document-preview {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force visibility for all media types in WhatsApp interface */
+img[src*="cloudinary"],
+img[src*="whatsapp"],
+video[src*="cloudinary"],
+audio[src*="cloudinary"] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Print styles for media elements */
+@media print {
+  .whatsapp-media,
+  .sticker-container,
+  .image-container,
+  .media-message {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    break-inside: avoid;
+  }
+}
